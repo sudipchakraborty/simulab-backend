@@ -1,0 +1,441 @@
+{
+  "kind": "real Arduino CLI evidence",
+  "hardwareUpload": "not performed",
+  "builds": [
+    {
+      "job": "9db4fda44d3076a70431332a6ddd2ba6",
+      "success": true,
+      "log": "Sketch uses 1972 bytes (6%) of program storage space. Maximum is 32256 bytes.\nGlobal variables use 208 bytes (10%) of dynamic memory, leaving 1840 bytes for local variables. Maximum is 2048 bytes.\n\n",
+      "diagnostics": [],
+      "artifacts": [
+        "sketch.ino.eep",
+        "sketch.ino.elf",
+        "sketch.ino.hex",
+        "sketch.ino.with_bootloader.bin",
+        "sketch.ino.with_bootloader.hex"
+      ],
+      "board": "uno"
+    },
+    {
+      "job": "988135d3db1c75a6bdbd001b8ae83e0f",
+      "success": true,
+      "log": "Sketch uses 284636 bytes (21%) of program storage space. Maximum is 1310720 bytes.\nGlobal variables use 22084 bytes (6%) of dynamic memory, leaving 305596 bytes for local variables. Maximum is 327680 bytes.\n\n",
+      "diagnostics": [],
+      "artifacts": [
+        "sketch.ino.bin",
+        "sketch.ino.bootloader.bin",
+        "sketch.ino.elf",
+        "sketch.ino.map",
+        "sketch.ino.merged.bin",
+        "sketch.ino.partitions.bin"
+      ],
+      "board": "esp32"
+    },
+    {
+      "job": "9ab714559a1e7d54be0baee8cf829832",
+      "board": "esp32s3",
+      "success": true,
+      "evidence": "Actual Arduino CLI exit0 after repairing interrupted core archive; no source modification",
+      "log": "��S\u0000k\u0000e\u0000t\u0000c\u0000h\u0000 \u0000u\u0000s\u0000e\u0000s\u0000 \u00003\u00001\u00003\u00002\u00002\u00000\u0000 \u0000b\u0000y\u0000t\u0000e\u0000s\u0000 \u0000(\u00002\u00003\u0000%\u0000)\u0000 \u0000o\u0000f\u0000 \u0000p\u0000r\u0000o\u0000g\u0000r\u0000a\u0000m\u0000 \u0000s\u0000t\u0000o\u0000r\u0000a\u0000g\u0000e\u0000 \u0000s\u0000p\u0000a\u0000c\u0000e\u0000.\u0000 \u0000M\u0000a\u0000x\u0000i\u0000m\u0000u\u0000m\u0000 \u0000i\u0000s\u0000 \u00001\u00003\u00001\u00000\u00007\u00002\u00000\u0000 \u0000b\u0000y\u0000t\u0000e\u0000s\u0000.\u0000\r\u0000\n\u0000G\u0000l\u0000o\u0000b\u0000a\u0000l\u0000 \u0000v\u0000a\u0000r\u0000i\u0000a\u0000b\u0000l\u0000e\u0000s\u0000 \u0000u\u0000s\u0000e\u0000 \u00002\u00001\u00009\u00009\u00002\u0000 \u0000b\u0000y\u0000t\u0000e\u0000s\u0000 \u0000(\u00006\u0000%\u0000)\u0000 \u0000o\u0000f\u0000 \u0000d\u0000y\u0000n\u0000a\u0000m\u0000i\u0000c\u0000 \u0000m\u0000e\u0000m\u0000o\u0000r\u0000y\u0000,\u0000 \u0000l\u0000e\u0000a\u0000v\u0000i\u0000n\u0000g\u0000 \u00003\u00000\u00005\u00006\u00008\u00008\u0000 \u0000b\u0000y\u0000t\u0000e\u0000s\u0000 \u0000f\u0000o\u0000r\u0000 \u0000l\u0000o\u0000c\u0000a\u0000l\u0000 \u0000v\u0000a\u0000r\u0000i\u0000a\u0000b\u0000l\u0000e\u0000s\u0000.\u0000 \u0000M\u0000a\u0000x\u0000i\u0000m\u0000u\u0000m\u0000 \u0000i\u0000s\u0000 \u00003\u00002\u00007\u00006\u00008\u00000\u0000 \u0000b\u0000y\u0000t\u0000e\u0000s\u0000.\u0000\r\u0000\n\u0000",
+      "artifacts": [
+        "sketch.ino.bin",
+        "sketch.ino.bootloader.bin",
+        "sketch.ino.elf",
+        "sketch.ino.map",
+        "sketch.ino.merged.bin",
+        "sketch.ino.partitions.bin"
+      ],
+      "diagnostics": []
+    },
+    {
+      "job": "31f9006c7c332e3764384cee6304dba6",
+      "success": true,
+      "log": "Sketch uses 318414 bytes (24%) of program storage space. Maximum is 1310720 bytes.\nGlobal variables use 22444 bytes (6%) of dynamic memory, leaving 305236 bytes for local variables. Maximum is 327680 bytes.\n\nIn file included from D:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/spi_flash_ll.h:17,\n                 from D:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\hardware\\esp32\\3.3.8\\cores\\esp32\\Esp.cpp:41:\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/gpspi_flash_ll.h: In function 'void gpspi_flash_ll_read_phase(spi_dev_t*)':\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/gpspi_flash_ll.h:191:5: warning: missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::doutdin' [-Wmissing-field-initializers]\n  191 |     };\n      |     ^\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/gpspi_flash_ll.h:191:5: warning: missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::reserved1' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/gpspi_flash_ll.h:191:5: warning: missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::qpi_mode' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/gpspi_flash_ll.h:191:5: warning: missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::opi_mode' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/gpspi_flash_ll.h:191:5: warning: missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::tsck_i_edge' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/gpspi_flash_ll.h:191:5: warning: missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::cs_hold' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/gpspi_flash_ll.h:191:5: warning: missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::cs_setup' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/gpspi_flash_ll.h:191:5: warning: missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::rsck_i_edge' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/gpspi_flash_ll.h:191:5: warning: missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::ck_out_edge' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/gpspi_flash_ll.h:191:5: warning: missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::reserved10' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/gpspi_flash_ll.h:191:5: warning: missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::fwrite_dual' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/gpspi_flash_ll.h:191:5: warning: missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::fwrite_quad' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/gpspi_flash_ll.h:191:5: warning: missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::fwrite_oct' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/gpspi_flash_ll.h:191:5: warning: missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::usr_conf_nxt' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/gpspi_flash_ll.h:191:5: warning: missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::reserved16' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/gpspi_flash_ll.h:191:5: warning: missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::sio' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/gpspi_flash_ll.h:191:5: warning: missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::reserved18' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/gpspi_flash_ll.h:191:5: warning: missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::usr_miso_highpart' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/gpspi_flash_ll.h:191:5: warning: missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::usr_mosi_highpart' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/gpspi_flash_ll.h:191:5: warning: missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::usr_dummy_idle' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/gpspi_flash_ll.h:191:5: warning: missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::usr_dummy' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/gpspi_flash_ll.h: In function 'void gpspi_flash_ll_set_command(spi_dev_t*, uint8_t, uint32_t)':\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/gpspi_flash_ll.h:309:5: warning: missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::reserved16' [-Wmissing-field-initializers]\n  309 |     };\n      |     ^\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/gpspi_flash_ll.h:309:5: warning: missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::mst_rempty_err_end_en' [-Wmissing-field-initializers]\nIn file included from D:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/spi_flash_ll.h:18:\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/spimem_flash_ll.h: In function 'void spimem_flash_ll_read_phase(spi_mem_dev_t*)':\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/spimem_flash_ll.h:425:5: warning: missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::reserved0' [-Wmissing-field-initializers]\n  425 |     };\n      |     ^\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/spimem_flash_ll.h:425:5: warning: missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::cs_hold' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/spimem_flash_ll.h:425:5: warning: missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::cs_setup' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/spimem_flash_ll.h:425:5: warning: missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::reserved8' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/spimem_flash_ll.h:425:5: warning: missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::ck_out_edge' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/spimem_flash_ll.h:425:5: warning: missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::reserved10' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/spimem_flash_ll.h:425:5: warning: missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::fwrite_dual' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/spimem_flash_ll.h:425:5: warning: missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::fwrite_quad' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/spimem_flash_ll.h:425:5: warning: missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::fwrite_dio' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/spimem_flash_ll.h:425:5: warning: missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::fwrite_qio' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/spimem_flash_ll.h:425:5: warning: missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::reserved16' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/spimem_flash_ll.h:425:5: warning: missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::usr_miso_highpart' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/spimem_flash_ll.h:425:5: warning: missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::usr_mosi_highpart' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/spimem_flash_ll.h:425:5: warning: missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::usr_dummy_idle' [-Wmissing-field-initializers]\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/hal/esp32s3/include/hal/spimem_flash_ll.h:425:5: warning: missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::usr_dummy' [-Wmissing-field-initializers]\nIn file included from D:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/arduino_tinyusb/tinyusb/src/tusb.h:59,\n                 from D:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\hardware\\esp32\\3.3.8\\cores\\esp32\\esp32-hal-tinyusb.h:27,\n                 from D:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\hardware\\esp32\\3.3.8\\cores\\esp32\\USBMSC.cpp:20:\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/arduino_tinyusb/tinyusb/src/class/cdc/cdc_host.h: In function 'bool tuh_cdc_set_dtr(uint8_t, bool, tuh_xfer_cb_t, uintptr_t)':\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/arduino_tinyusb/tinyusb/src/class/cdc/cdc_host.h:154:58: warning: missing initializer for member 'cdc_line_control_state_t::<unnamed struct>::rts' [-Wmissing-field-initializers]\n  154 |   cdc_line_control_state_t line_state = {.dtr = dtr_state};\n      |                                                          ^\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/arduino_tinyusb/tinyusb/src/class/cdc/cdc_host.h: In function 'bool tuh_cdc_set_rts(uint8_t, bool, tuh_xfer_cb_t, uintptr_t)':\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/arduino_tinyusb/tinyusb/src/class/cdc/cdc_host.h:162:58: warning: missing initializer for member 'cdc_line_control_state_t::<unnamed struct>::dtr' [-Wmissing-field-initializers]\n  162 |   cdc_line_control_state_t line_state = {.rts = rts_state};\n      |                                                          ^\nIn file included from D:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/arduino_tinyusb/tinyusb/src/tusb.h:59,\n                 from D:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\hardware\\esp32\\3.3.8\\cores\\esp32\\esp32-hal-tinyusb.h:27,\n                 from D:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\hardware\\esp32\\3.3.8\\cores\\esp32\\USB.cpp:22:\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/arduino_tinyusb/tinyusb/src/class/cdc/cdc_host.h: In function 'bool tuh_cdc_set_dtr(uint8_t, bool, tuh_xfer_cb_t, uintptr_t)':\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/arduino_tinyusb/tinyusb/src/class/cdc/cdc_host.h:154:58: warning: missing initializer for member 'cdc_line_control_state_t::<unnamed struct>::rts' [-Wmissing-field-initializers]\n  154 |   cdc_line_control_state_t line_state = {.dtr = dtr_state};\n      |                                                          ^\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/arduino_tinyusb/tinyusb/src/class/cdc/cdc_host.h: In function 'bool tuh_cdc_set_rts(uint8_t, bool, tuh_xfer_cb_t, uintptr_t)':\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/arduino_tinyusb/tinyusb/src/class/cdc/cdc_host.h:162:58: warning: missing initializer for member 'cdc_line_control_state_t::<unnamed struct>::dtr' [-Wmissing-field-initializers]\n  162 |   cdc_line_control_state_t line_state = {.rts = rts_state};\n      |                                                          ^\nIn file included from D:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/arduino_tinyusb/tinyusb/src/tusb.h:59,\n                 from D:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\hardware\\esp32\\3.3.8\\cores\\esp32\\esp32-hal-tinyusb.h:27,\n                 from D:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\hardware\\esp32\\3.3.8\\cores\\esp32\\USBCDC.cpp:21:\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/arduino_tinyusb/tinyusb/src/class/cdc/cdc_host.h: In function 'bool tuh_cdc_set_dtr(uint8_t, bool, tuh_xfer_cb_t, uintptr_t)':\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/arduino_tinyusb/tinyusb/src/class/cdc/cdc_host.h:154:58: warning: missing initializer for member 'cdc_line_control_state_t::<unnamed struct>::rts' [-Wmissing-field-initializers]\n  154 |   cdc_line_control_state_t line_state = {.dtr = dtr_state};\n      |                                                          ^\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/arduino_tinyusb/tinyusb/src/class/cdc/cdc_host.h: In function 'bool tuh_cdc_set_rts(uint8_t, bool, tuh_xfer_cb_t, uintptr_t)':\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\esp32\\tools\\esp32s3-libs\\3.3.8/include/arduino_tinyusb/tinyusb/src/class/cdc/cdc_host.h:162:58: warning: missing initializer for member 'cdc_line_control_state_t::<unnamed struct>::dtr' [-Wmissing-field-initializers]\n  162 |   cdc_line_control_state_t line_state = {.rts = rts_state};\n      |                                                          ^\n",
+      "diagnostics": [
+        {
+          "file": "gpspi_flash_ll.h",
+          "line": 191,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::doutdin' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "gpspi_flash_ll.h",
+          "line": 191,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::reserved1' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "gpspi_flash_ll.h",
+          "line": 191,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::qpi_mode' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "gpspi_flash_ll.h",
+          "line": 191,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::opi_mode' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "gpspi_flash_ll.h",
+          "line": 191,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::tsck_i_edge' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "gpspi_flash_ll.h",
+          "line": 191,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::cs_hold' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "gpspi_flash_ll.h",
+          "line": 191,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::cs_setup' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "gpspi_flash_ll.h",
+          "line": 191,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::rsck_i_edge' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "gpspi_flash_ll.h",
+          "line": 191,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::ck_out_edge' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "gpspi_flash_ll.h",
+          "line": 191,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::reserved10' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "gpspi_flash_ll.h",
+          "line": 191,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::fwrite_dual' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "gpspi_flash_ll.h",
+          "line": 191,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::fwrite_quad' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "gpspi_flash_ll.h",
+          "line": 191,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::fwrite_oct' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "gpspi_flash_ll.h",
+          "line": 191,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::usr_conf_nxt' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "gpspi_flash_ll.h",
+          "line": 191,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::reserved16' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "gpspi_flash_ll.h",
+          "line": 191,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::sio' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "gpspi_flash_ll.h",
+          "line": 191,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::reserved18' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "gpspi_flash_ll.h",
+          "line": 191,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::usr_miso_highpart' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "gpspi_flash_ll.h",
+          "line": 191,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::usr_mosi_highpart' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "gpspi_flash_ll.h",
+          "line": 191,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::usr_dummy_idle' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "gpspi_flash_ll.h",
+          "line": 191,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::usr_dummy' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "gpspi_flash_ll.h",
+          "line": 309,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::reserved16' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "gpspi_flash_ll.h",
+          "line": 309,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_dev_s::<unnamed union>::<unnamed struct>::mst_rempty_err_end_en' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "spimem_flash_ll.h",
+          "line": 425,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::reserved0' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "spimem_flash_ll.h",
+          "line": 425,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::cs_hold' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "spimem_flash_ll.h",
+          "line": 425,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::cs_setup' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "spimem_flash_ll.h",
+          "line": 425,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::reserved8' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "spimem_flash_ll.h",
+          "line": 425,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::ck_out_edge' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "spimem_flash_ll.h",
+          "line": 425,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::reserved10' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "spimem_flash_ll.h",
+          "line": 425,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::fwrite_dual' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "spimem_flash_ll.h",
+          "line": 425,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::fwrite_quad' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "spimem_flash_ll.h",
+          "line": 425,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::fwrite_dio' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "spimem_flash_ll.h",
+          "line": 425,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::fwrite_qio' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "spimem_flash_ll.h",
+          "line": 425,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::reserved16' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "spimem_flash_ll.h",
+          "line": 425,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::usr_miso_highpart' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "spimem_flash_ll.h",
+          "line": 425,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::usr_mosi_highpart' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "spimem_flash_ll.h",
+          "line": 425,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::usr_dummy_idle' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "spimem_flash_ll.h",
+          "line": 425,
+          "column": 5,
+          "severity": "warning",
+          "message": "missing initializer for member 'spi_mem_dev_s::<unnamed union>::<unnamed struct>::usr_dummy' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "cdc_host.h",
+          "line": 154,
+          "column": 58,
+          "severity": "warning",
+          "message": "missing initializer for member 'cdc_line_control_state_t::<unnamed struct>::rts' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "cdc_host.h",
+          "line": 162,
+          "column": 58,
+          "severity": "warning",
+          "message": "missing initializer for member 'cdc_line_control_state_t::<unnamed struct>::dtr' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "cdc_host.h",
+          "line": 154,
+          "column": 58,
+          "severity": "warning",
+          "message": "missing initializer for member 'cdc_line_control_state_t::<unnamed struct>::rts' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "cdc_host.h",
+          "line": 162,
+          "column": 58,
+          "severity": "warning",
+          "message": "missing initializer for member 'cdc_line_control_state_t::<unnamed struct>::dtr' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "cdc_host.h",
+          "line": 154,
+          "column": 58,
+          "severity": "warning",
+          "message": "missing initializer for member 'cdc_line_control_state_t::<unnamed struct>::rts' [-Wmissing-field-initializers]"
+        },
+        {
+          "file": "cdc_host.h",
+          "line": 162,
+          "column": 58,
+          "severity": "warning",
+          "message": "missing initializer for member 'cdc_line_control_state_t::<unnamed struct>::dtr' [-Wmissing-field-initializers]"
+        }
+      ],
+      "artifacts": [
+        "sketch.ino.bin",
+        "sketch.ino.bootloader.bin",
+        "sketch.ino.elf",
+        "sketch.ino.map",
+        "sketch.ino.merged.bin",
+        "sketch.ino.partitions.bin"
+      ],
+      "board": "yd-n16r8"
+    }
+  ],
+  "status": {
+    "available": true,
+    "version": "{\n  \"Application\": \"arduino-cli\",\n  \"VersionString\": \"1.5.1\",\n  \"Commit\": \"01f3d4f2b\",\n  \"Status\": \"\",\n  \"Date\": \"2026-06-05T10:22:12Z\"\n}\n",
+    "boards": {
+      "uno": {
+        "name": "Arduino Uno",
+        "fqbn": "arduino:avr:uno",
+        "simulation": "uno"
+      },
+      "esp32": {
+        "name": "ESP32 DevKit",
+        "fqbn": "esp32:esp32:esp32",
+        "simulation": null
+      },
+      "esp32s3": {
+        "name": "ESP32-S3 DevKit",
+        "fqbn": "esp32:esp32:esp32s3",
+        "simulation": "esp32s3"
+      },
+      "yd-n16r8": {
+        "name": "YD ESP32-S3 N16R8 (compatible generic profile)",
+        "fqbn": "esp32:esp32:esp32s3:FlashSize=16M,PSRAM=opi",
+        "simulation": "esp32s3",
+        "warning": "Compatible compile profile only; physical module and emulator full 16 MiB capacity unverified"
+      }
+    },
+    "hardwareVerified": false
+  },
+  "ports": {
+    "ports": [
+      {
+        "port": {
+          "address": "COM3",
+          "label": "COM3",
+          "protocol": "serial",
+          "protocol_label": "Serial Port",
+          "properties": {}
+        }
+      },
+      {
+        "port": {
+          "address": "COM4",
+          "label": "COM4",
+          "protocol": "serial",
+          "protocol_label": "Serial Port",
+          "properties": {}
+        }
+      }
+    ]
+  },
+  "failure": {
+    "job": "d139fbbd5d7c12321317c72b17b81b86",
+    "success": false,
+    "log": "\nUsed platform Version Path\narduino:avr   1.8.6   D:\\PROJECTS\\Simulab\\simulab-backend\\.local\\data\\packages\\arduino\\hardware\\avr\\1.8.6\n\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\verification\\d139fbbd5d7c12321317c72b17b81b86\\sketch\\sketch.ino: In function 'void setup()':\r\nD:\\PROJECTS\\Simulab\\simulab-backend\\.local\\verification\\d139fbbd5d7c12321317c72b17b81b86\\sketch\\sketch.ino:1:15: error: 'unknown_function' was not declared in this scope\r\n void setup(){ unknown_function(); }\r\n               ^~~~~~~~~~~~~~~~\r\nError during build: exit status 1\n",
+    "diagnostics": [
+      {
+        "file": "sketch.ino",
+        "line": 1,
+        "column": 15,
+        "severity": "error",
+        "message": "'unknown_function' was not declared in this scope"
+      }
+    ],
+    "artifacts": [],
+    "board": "uno"
+  }
+}

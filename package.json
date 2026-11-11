@@ -1,0 +1,18 @@
+{
+  "name": "simulab-local-companion",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.mjs",
+    "test": "node --test test/*.test.mjs",
+    "setup:toolchain": "node scripts/setup-toolchain.mjs",
+    "start:accounts": "node src/account-server.mjs"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "nodemailer": "^10.3.1"
+  }
+}

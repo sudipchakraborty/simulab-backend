@@ -1,0 +1,31 @@
+# Account service
+
+The account API is independent of the hardware companion. Use Node 24+ (built-in SQLite currently emits an experimental warning). Run `npm install`, then configure mail delivery and run `npm run start:accounts`. Default bind is loopback port 4320. The Vite app proxies `/api` here.
+
+For explicit local development in PowerShell:
+
+```powershell
+$env:ACCOUNT_DEV_OUTBOX = '.local/mail-outbox'
+$env:APP_URL = 'http://localhost:5173'
+npm run start:accounts
+```
+
+Outbox JSON contains single-use secret links. It is local development storage, **not delivered mail**. Protect `.local`, keep it out of Git, and delete obsolete messages. SMTP needs `SMTP_HOST`, `SMTP_PORT` (587 by default), `SMTP_TLS` (`true` for implicit TLS, commonly port 465), `SMTP_FROM`, optional `SMTP_USER`/`SMTP_PASSWORD`. STARTTLS is negotiated by Nodemailer on nonimplicit TLS ports. No real emails or payments are sent by the tests.
+
+Configuration is injected into `createAccountServer(options)` in `src/accounts/server.mjs`. It returns `{server,service,close}`. `service` is a trusted in-process administration interface and is never exposed wholesale by HTTP. The persistent SQLite path defaults to `.local/accounts.sqlite`; the atomic per-user theme JSON path defaults to `.local/SYSTEM.json`. Run one account process per config file. Back up both files together. Override using `ACCOUNT_DB`, `ACCOUNT_SYSTEM_CONFIG`, `ACCOUNT_HOST`, `ACCOUNT_PORT`, `ACCOUNT_ORIGINS` (comma-separated exact origins), `APP_URL`, `ACCOUNT_TRIAL_DAYS` (default 30). Use HTTPS and `ACCOUNT_SECURE_COOKIES=true` for deployment. Account routes require credentials and the `x-csrf-token` returned by `GET /api/auth/session` for mutations, including anonymous signup/login/reset requests. Origin must exactly match an allowlisted origin. HttpOnly cookies carry random opaque session IDs; only hashes are in SQLite. Remember login lasts 30 days, ordinary login one day with a browser-session cookie. Passwords are scrypt hashes with individual random salts.
+
+Signup returns `{status:'pending-verification'}` and creates an editor account. Email links open `APP_URL/?verify=TOKEN`; the frontend consumes `GET /api/auth/verify?token=TOKEN`. The API atomically consumes the expiring token, verifies ownership, issues a persistent session cookie, and returns the session contract with `status:'verified'`. It does not allow replay. Login returns the same session contract. Forgot/reset routes are `POST /api/auth/forgot-password {email}` and `POST /api/auth/reset-password {token,password}`. Reset revokes all existing sessions. No plaintext remembered password or browser bearer credential is used.
+
+Session fields: `{user:{id,email,role,verified}|null,subscription:{mode,expiresAt},permissions:[],preferences:{theme},csrfToken}`. Timestamps are Unix epoch milliseconds. Anonymous subscription is `{mode:'expired',expiresAt:null}`. Permissions are `projects.read`, `projects.write`, `simulation.run`, `hardware.upload`, `users.manage`, `billing.manage`. Saving requires both active paid entitlement and editor/admin role. Trial/expired administrators cannot save. Project reads/writes/deletes are scoped to their owner. `GET /api/projects` returns `{projects}`; individual reads/creates/updates return `{project}`. Writes accept `{name,data}`. Themes may be updated by any signed-in role through `PUT /api/preferences {theme}`.
+
+No first-signup administrator exists. Verify an account, stop the server, set `ACCOUNT_BOOTSTRAP_ADMIN` to its exact email, start the trusted operator process once, then remove that environment setting. The trusted `service.bootstrapAdmin(email)` offers the same operation for managed hosting. Role changes are audited and the final administrator cannot be demoted. Admin routes: `GET /api/admin/users`, `PUT /api/admin/users/:id/role {role}`, `GET /api/admin/payments`, `POST /api/admin/payments/:id/approve`.
+
+Checkout stays disabled until all of `PAYMENT_AMOUNT_MINOR` (positive integer in minor currency units), `PAYMENT_CURRENCY` (three uppercase letters), `PAYMENT_QR_IMAGE` are supplied. There is no invented default price. `PAYMENT_PAID_DAYS` defaults to 30. Config returns `{enabled,amount,currency,qrImage,confirmation:'provider-or-administrator'}`. Checkout returns `{payment,...config}`; payment reads/reference submissions return `{payment}`. A reference submission never grants entitlement. Administrator approval records the operator identity in the audit table and can only activate once.
+
+An injected `paymentVerifier({rawBody,headers})` must validate provider authenticity and return `{eventId,paymentId,status:'paid',amount,currency}`. Alternatively `PAYMENT_WEBHOOK_SECRET` enables a generic HMAC adapter: `x-payment-signature` is lowercase hex HMAC-SHA256 of the exact raw request body. This adapter is not a claim of integration with a particular payment provider. API validates stored amount/currency and handles event/payment IDs idempotently in a transaction. Replay cannot extend subscription. Trusted service calls such as `grantPaid(id,expiresAt,actor)` are for operator/test harness use, never remote test bypasses.
+
+`npm test` includes real HTTP security/account workflows with isolated temporary SQLite/config files, fake clock, explicitly injected local-only test mail, and synthetic signed payment events. `npm audit --omit=dev` checks installed dependency advisories.
+
+Verification recovery: `POST /api/auth/resend-verification {email}` uses normal anonymous CSRF proof and responds generically with delivery mode. It rotates pending verification tokens; existing verified or unknown addresses are not disclosed. An unverified signup may also be retried with the same email and correct password after an SMTP failure. Signup/forgot responses expose only safe transport mode (`development-outbox`, `smtp` or `injected`), never secret links. Password reset links use `APP_URL/?reset=TOKEN`.
+
+The configured trial starts at successful email verification. SMTP on nonimplicit TLS ports requires STARTTLS before authentication and fails closed when the server cannot provide TLS. Session authority is reloaded after streamed request bodies so a concurrent logout, reset or role change cannot authorize a stale write.
