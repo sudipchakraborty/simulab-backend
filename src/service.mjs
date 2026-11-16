@@ -3,6 +3,9 @@ import { randomBytes, timingSafeEqual } from "node:crypto";
 import { mkdir, writeFile, readdir, readFile, rm } from "node:fs/promises";
 import { join } from "node:path";
 import { boards } from "./boards.mjs";
+import { createSimulationSessions } from "./simulation-sessions.mjs";
+import { createBuildCache, prepareWorkspace, ownedPath, canReuseExactArtifacts } from "./build-cache.mjs";
+import { createCompileProgress } from "./compile-progress.mjs";
 const fail = (status, message) => {
   throw Object.assign(new Error(message), { status });
 };
@@ -33,11 +36,21 @@ export function validateFiles(files) {
 /** @brief Create restricted loopback HTTP companion with injected runner for testability.
  * @param options Trusted host configuration: token, exact allowed origins, private root and fixed CLI runner.
  */
-export function createCompanion({ token, origins, root, runner }) {
+export function createCompanion({
+  token,
+  origins,
+  root,
+  runner,
+  now = Date.now,
+  buildFingerprint = runner.fingerprint ?? (async () => "injected-toolchain"),
+}) {
   if (typeof token !== "string" || token.length < 8)
     throw new Error("Companion token is required");
   const jobs = new Map(),
     consents = new Map();
+  const simulationSessions = createSimulationSessions({ origins, now });
+  const cache = createBuildCache(ownedPath(root, "artifact-cache"), { now });
+  const progress = createCompileProgress({ now });
   let busy = false;
   const ports = async () => {
     const r = await runner(["board", "list", "--format", "json"]);
@@ -59,13 +72,13 @@ export function createCompanion({ token, origins, root, runner }) {
     )
       fail(400, "Detected board does not match the selected build profile");
   };
-  const getJob = (id) => {
+  const getJob = (id, owner) => {
     const j = jobs.get(id);
-    if (!j || Date.now() - j.created > 3600000)
+    if (!j || now() - j.created > 3600000 || (owner && j.owner !== owner))
       fail(404, "Build expired; compile again");
     return j;
   };
-  return createServer(async (req, res) => {
+  const server = createServer(async (req, res) => {
     const send = (status, data) => {
       res.writeHead(status, {
         "Content-Type": "application/json",
@@ -92,13 +105,43 @@ export function createCompanion({ token, origins, root, runner }) {
         res.end();
         return;
       }
+      const path = new URL(req.url, "http://127.0.0.1").pathname;
+      const sessionRequest =
+        req.method === "POST" && path === "/simulation/session";
       const supplied = Buffer.from(req.headers.authorization ?? ""),
         expected = Buffer.from("Bearer " + token);
-      if (
-        supplied.length !== expected.length ||
-        !timingSafeEqual(supplied, expected)
-      )
-        fail(401, "Pair with the companion token shown in your local terminal");
+      const terminal =
+        supplied.length === expected.length &&
+        timingSafeEqual(supplied, expected);
+      let principal;
+      const authorize = () => {
+        if (sessionRequest) {
+          // Session issuance is a browser-origin capability, never a terminal-token exchange.
+          if (!origin || !origins.includes(origin))
+            fail(403, "Simulation session origin denied");
+          return;
+        }
+        if (terminal) return;
+        principal = simulationSessions.authenticate(
+          req.headers.authorization,
+          origin,
+        );
+        if (!principal)
+          fail(
+            401,
+            "Pair with the companion token shown in your local terminal",
+          );
+        if (!(
+          (req.method === "GET" &&
+            (path === "/status" || path.startsWith("/artifact/") || path.startsWith("/compile-progress/"))) ||
+          (req.method === "POST" && path === "/compile")
+        ))
+          fail(
+            403,
+            "Simulation sessions permit compilation and owned artifacts only",
+          );
+      };
+      authorize();
       let data = {};
       if (req.method === "POST") {
         if (!req.headers["content-type"]?.startsWith("application/json"))
@@ -106,7 +149,7 @@ export function createCompanion({ token, origins, root, runner }) {
         let body = "";
         for await (const chunk of req) {
           body += chunk;
-          if (Buffer.byteLength(body) > 1_100_000)
+          if (Buffer.byteLength(body) > (sessionRequest ? 1024 : 1_100_000))
             fail(413, "Request too large");
         }
         try {
@@ -117,7 +160,12 @@ export function createCompanion({ token, origins, root, runner }) {
         if (!data || typeof data !== "object" || Array.isArray(data))
           fail(400, "Expected a JSON object");
       }
-      const path = new URL(req.url, "http://127.0.0.1").pathname;
+      // A streamed POST must still hold a live session after its final byte arrives.
+      authorize();
+      if (sessionRequest) {
+        send(200, simulationSessions.issue(origin));
+        return;
+      }
       if (req.method === "GET" && path === "/status") {
         const r = await runner(["version", "--format", "json"]);
         send(200, {
@@ -130,6 +178,10 @@ export function createCompanion({ token, origins, root, runner }) {
       }
       if (req.method === "GET" && path === "/ports") {
         send(200, { ports: await ports() });
+        return;
+      }
+      if (req.method === "GET" && path.startsWith("/compile-progress/")) {
+        send(200, progress.get(path.slice("/compile-progress/".length), principal?.owner));
         return;
       }
       if (req.method === "GET" && path === "/libraries") {
@@ -148,6 +200,8 @@ export function createCompanion({ token, origins, root, runner }) {
         busy = true;
         try {
           const r = await runner(["lib", "install", data.name]);
+          await cache.clear();
+          runner.invalidate?.();
           send(200, { success: r.code === 0, log: r.stdout + "\n" + r.stderr });
         } finally {
           busy = false;
@@ -155,26 +209,47 @@ export function createCompanion({ token, origins, root, runner }) {
         return;
       }
       if (req.method === "POST" && path === "/compile") {
-        if (busy) fail(409, "Toolchain is busy");
         if (!Object.hasOwn(boards, data.board))
           fail(400, "Unknown board profile");
         validateFiles(data.files);
+        if (data.requestId !== undefined && (typeof data.requestId !== "string" || !/^[a-f0-9]{32}$/.test(data.requestId)))
+          fail(400, "Invalid compile requestId");
+        if (busy) fail(409, "Toolchain is busy");
         busy = true;
+        let tracking;
         try {
+          tracking = progress.start(data.requestId, principal?.owner, data.board);
+          const started = now();
           // Bound retained artifacts, and keep all filesystem destinations under this service-owned root.
           while (jobs.size >= 10) {
             const id = jobs.keys().next().value;
-            await rm(join(root, id), { recursive: true, force: true });
+            await rm(ownedPath(root, id), { recursive: true, force: true });
             jobs.delete(id);
           }
           const id = randomBytes(16).toString("hex"),
-            dir = join(root, id),
-            sketch = join(dir, "sketch"),
+            dir = ownedPath(root, id),
             output = join(dir, "output");
-          await mkdir(sketch, { recursive: true });
           await mkdir(output, { recursive: true });
-          for (const f of data.files)
-            await writeFile(join(sketch, f.name), f.content, "utf8");
+          jobs.set(id, { owner: principal?.owner, board: data.board, output, artifacts: [], success: false, created: now() });
+          const sketch = await prepareWorkspace(root, data.board, data.files);
+          const fingerprint = await buildFingerprint(data.board, sketch);
+          const cacheKey = cache.key(data.board, boards[data.board].fqbn, data.files, fingerprint);
+          const reusable = canReuseExactArtifacts(data.files);
+          const cached = reusable ? await cache.restore(cacheKey, output) : undefined;
+          if (cached) {
+            const result = { ...cached, job: id, cached: true, durationMs: Math.max(0, now() - started) };
+            jobs.set(id, { owner: principal?.owner, board: data.board, output, artifacts: result.artifacts, success: true, created: now() });
+            progress.finish(tracking, true, true);
+            send(200, result);
+            return;
+          }
+          const buildPath = ownedPath(root, "cache", data.board);
+          const stampPath = ownedPath(buildPath, ".simulab-toolchain-fingerprint");
+          let previousFingerprint;
+          try { previousFingerprint = await readFile(stampPath, "utf8"); }
+          catch (error) { if (error.code !== "ENOENT") throw error; }
+          if (previousFingerprint && previousFingerprint !== fingerprint)
+            await rm(buildPath, { recursive: true, force: true });
           const args = [
             "compile",
             "--fqbn",
@@ -186,38 +261,39 @@ export function createCompanion({ token, origins, root, runner }) {
             "--output-dir",
             output,
             "--build-path",
-            join(root, "cache", data.board),
+            buildPath,
             sketch,
           ];
           jobs.set(id, {
+            owner: principal?.owner,
             board: data.board,
             output,
             artifacts: [],
             success: false,
-            created: Date.now(),
+            created: now(),
           });
           let result;
           try {
-            result = await runner(args);
+            result = await runner(args, { fingerprint, onProgress: (value) => progress.update(tracking, value) });
           } catch (error) {
             await writeFile(join(dir, "build.log"), error.message);
             // An interrupted archiver can leave core.a missing otherwise-valid compiled objects.
             // Board is allowlisted and this is a single file under the service-owned cache.
-            await rm(join(root, "cache", data.board, "core", "core.a"), {
-              force: true,
-            });
+            if (error.interrupted !== false) await rm(ownedPath(root, "cache", data.board, "core", "core.a"), { force: true });
             throw error;
           }
           const log = result.stdout + "\n" + result.stderr;
           await writeFile(join(dir, "build.log"), log);
           const artifacts = await readdir(output);
-          const success = result.code === 0;
+          const unchanged = fingerprint === await buildFingerprint(data.board, sketch);
+          const success = result.code === 0 && unchanged && artifacts.some((name) => /\.(?:hex|bin)$/.test(name));
           jobs.set(id, {
+            owner: principal?.owner,
             board: data.board,
             output,
             artifacts,
             success,
-            created: Date.now(),
+            created: now(),
           });
           const diagnostics = [
             ...log.matchAll(
@@ -230,14 +306,26 @@ export function createCompanion({ token, origins, root, runner }) {
             severity: m[4],
             message: m[5],
           }));
-          send(200, {
+          const response = {
             job: id,
             success,
-            log,
+            log: unchanged ? log : log + "\nToolchain or libraries changed during compilation. Build again.",
             diagnostics,
             artifacts,
             board: data.board,
-          });
+            cached: false,
+            durationMs: Math.max(0, now() - started),
+          };
+          if (success) {
+            await mkdir(buildPath, { recursive: true });
+            await writeFile(stampPath, fingerprint, "utf8");
+            if (reusable) await cache.store(cacheKey, output, response);
+          }
+          progress.finish(tracking, success);
+          send(200, response);
+        } catch (error) {
+          progress.finish(tracking, false);
+          throw error;
         } finally {
           busy = false;
         }
@@ -245,7 +333,7 @@ export function createCompanion({ token, origins, root, runner }) {
       }
       if (req.method === "GET" && path.startsWith("/artifact/")) {
         const [, , id, name] = path.split("/"),
-          job = getJob(id);
+          job = getJob(id, principal?.owner);
         if (
           !job.success ||
           !job.artifacts.includes(name) ||
@@ -314,4 +402,6 @@ export function createCompanion({ token, origins, root, runner }) {
       send(e.status ?? 500, { error: e.message });
     }
   });
+  server.once("close", () => runner.close?.());
+  return server;
 }

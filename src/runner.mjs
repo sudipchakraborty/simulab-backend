@@ -1,10 +1,13 @@
 import { spawn } from "node:child_process";
+import { createNativeCompiler } from "./compiler-rpc.mjs";
+import { createToolchainFingerprint } from "./toolchain-fingerprint.mjs";
 /** @brief Run a fixed executable without a shell; bound duration and combined log bytes. */
 export function commandRunner(executable, configFile) {
   const timeoutMs = Number(process.env.SIMULAB_TOOLCHAIN_TIMEOUT_MS ?? 600000);
   if (!Number.isInteger(timeoutMs) || timeoutMs < 1000 || timeoutMs > 1800000)
     throw new Error("Trusted toolchain timeout must be 1000..1800000 ms");
-  return (args) =>
+  const native = createNativeCompiler(executable, configFile, { timeoutMs });
+  const cli = (args, options = {}) =>
     new Promise((resolve, reject) => {
       const child = spawn(
         executable,
@@ -34,7 +37,7 @@ export function commandRunner(executable, configFile) {
             { status: 504 },
           ),
         );
-      }, timeoutMs);
+      }, options.timeoutMs ?? timeoutMs);
       const collect = (field) => (chunk) => {
         size += chunk.length;
         if (size > 2_000_000) {
@@ -61,4 +64,17 @@ export function commandRunner(executable, configFile) {
         });
       });
     });
+  const mode = process.env.SIMULAB_COMPILER_TRANSPORT ?? "grpc";
+  if (!["grpc", "cli"].includes(mode)) throw new Error("Invalid compiler transport");
+  const run = (args, options = {}) => {
+    if (args[0] !== "compile") return cli(args, options);
+    if (mode === "grpc") return native.compile(args, options);
+    options.onProgress?.({ stage: "Compiling (percentage unavailable in compatibility mode)" });
+    return cli(args, options);
+  };
+  /** @brief Revalidate external installed tool/core/library changes before every exact artifact-cache lookup. */
+  run.fingerprint = createToolchainFingerprint({ cli, executable, configFile });
+  run.invalidate = () => native.invalidate();
+  run.close = () => { run.fingerprint.close(); return native.close(); };
+  return run;
 }
